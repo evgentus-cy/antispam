@@ -22,23 +22,23 @@ class Kohana_Antispam {
 	
 	public function __construct($html = NULL){
 		// Подгружаем класс Botobor 0.3.0		
-        if ( ! self::$botobor_class){
+        if ( ! Antispam::$botobor_class){
             require Kohana::find_file('vendor', 'botobor', 'php');
         }
-        self::$botobor_class = new Botobor_Form($html);
-		self::$config = Kohana::$config->load('antispam');
-		foreach (self::$config['checks'] as $type => $val){
-			self::$botobor_class->setCheck($type, $val);
+        Antispam::$botobor_class = new Botobor_Form($html);
+		Antispam::$config = Kohana::$config->load('antispam');
+		foreach (Antispam::$config['checks'] as $type => $val){
+			Antispam::$botobor_class->setCheck($type, $val);
 		}
-		self::$botobor_class->setDelay(self::$config['delay']);
-		self::$botobor_class->setLifetime(self::$config['lifetime']);
-		self::$botobor_class->addHoneypot(self::$config['honeypots']);
-		Botobor::setSecret(self::$config['secret_key']);
+		Antispam::$botobor_class->setDelay(Antispam::$config['delay']);
+		Antispam::$botobor_class->setLifetime(Antispam::$config['lifetime']);
+		Antispam::$botobor_class->addHoneypot(Antispam::$config['honeypots']);
+		Botobor::setSecret(Antispam::$config['secret_key']);
 	}
 	
 	// Получаем измененный код формы
 	public static function getForm(){
-		return self::$botobor_class->getCode();
+		return Antispam::$botobor_class->getCode();
 	}
 	
 	// Проверка на "человечность"
