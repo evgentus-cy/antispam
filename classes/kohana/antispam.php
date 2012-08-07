@@ -1,5 +1,14 @@
 <?php 
 defined('SYSPATH') OR die('No direct access allowed.');
+/**
+ * Antispam module
+ *
+ * Kohana 3.2 module
+ *
+ * @package    Antispam
+ * @author     Кузнецов Евгений
+ * @email      evgentus88@mail.ru
+ */
 class Kohana_Antispam {
 
 	protected static $botobor_class;
